@@ -1,6 +1,7 @@
 import argparse
 from PlatformDataRetriever import PlatformDataRetriever
 from GameInvertedIndex import GameInvertedIndex
+from threading import Thread
 
 
 def load_game_data():
@@ -13,11 +14,20 @@ def load_game_data():
     n64 = PlatformDataRetriever(43, "Nintendo 64")
 
     all_games = []
-    nes_games = nes.retrieve_games_for_platform()
-    snes_games = snes.retrieve_games_for_platform()
-    n64_games = n64.retrieve_games_for_platform()
+    my_threads = []
+    my_threads.append(Thread(target=nes.retrieve_games_for_platform, args=()))
+    my_threads.append(Thread(target=snes.retrieve_games_for_platform, args=()))
+    my_threads.append(Thread(target=n64.retrieve_games_for_platform, args=()))
 
-    all_games = nes_games + snes_games + n64_games
+    for i in my_threads:
+        i.start()
+
+    for i in my_threads:
+        i.join()
+
+    all_games = nes.names + snes.names + n64.names
+
+    print len(all_games)
 
     inverted = GameInvertedIndex(all_games)
     inverted.build_index()
@@ -66,7 +76,8 @@ def run_main():
                 print '%s  (%s)' % (i['name'], i['platform'])
         elif choice == '2':
             for i in game_index.documents:
-                print i
+                print '%s  (%s)' % (i['name'], i['platform'])
+            print "Total Games:  %s" % len(game_index.documents)
         elif choice == '0':
             pass
         else:
