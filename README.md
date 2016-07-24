@@ -17,10 +17,10 @@ python main.py
 The code is broken up into 3 main modules
 
 1.  main.py
-  * Responsible for running the actual program.  It first pulls the data from the Giant Bomb API, builds an inverted index on it and then presents the user with a menu from which they can choose to search, quit or see a listing of all the games and their corresponding platforms.
+  * Responsible for running the actual program.  It first pulls the data from the Giant Bomb API, builds an inverted index on it and then presents the user with a menu from which they can choose to search, quit or see a listing of all the games and their corresponding platforms.  Threading is used to pull for the 3 platforms.
   
 2.  PlatformDataRetriever.py
-  * This class performs the retrieval of data for a given platform.  It uses threads to expedite the process.  An initial api call is made to get the total number of games which is then used to figure out how many batches of api calls to make.  Batch size is set to 100 (based on Giant Bomb's limit).  The total number of batches are also used to initialize a 'results' list where each index in the result represents of the batched data for that thread.
+  * This class performs the retrieval of data for a given platform.  It uses threads to expedite the process of making concurrent calls to the api.  An initial api call is made to get the total number of games which is then used to figure out how many batches of api calls to make.  Batch size is set to 100 (based on Giant Bomb's limit).  The total number of batches are also used to initialize a 'results' list where each index in the result represents of the batched data for that thread.
   
 3.  GameInvertedIndex.py
   * This class stores all the game data returned by the api, builds an index on it and allows that index to be searched.  It assumes the document data is formatted in a certain way and if that format is not met, a runtime error is raised.
