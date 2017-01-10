@@ -4,6 +4,10 @@
 
 ## Background
 
+GiantBomb API
+---
+http://www.giantbomb.com/api/
+
 This code challenge uses python2.7 as a command line tool which can be invoked by the following command(s):
 ```
 cd src
