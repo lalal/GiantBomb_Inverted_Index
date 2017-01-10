@@ -1,10 +1,8 @@
-# Super-Octo-Winner (aka, Switch_Search)
+# GiantBomb_Inverted_Index
 
 ---
 
 ## Background
-
-Full requirements are described [here](https://docs.google.com/document/d/1POgnrJPYVQcLINMXQMkLLiFxo8xy7mMCUIrK61HB5JI/edit#)
 
 This code challenge uses python2.7 as a command line tool which can be invoked by the following command(s):
 ```
