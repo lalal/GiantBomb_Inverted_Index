@@ -37,7 +37,7 @@ class PlatformDataRetriever:
                       limit=limit,
                       platforms='%s' % self.platform,
                       field_list=self.field_list)
-        resp = requests.get(url=self.url, params=params)
+        resp = requests.get(url=self.url, params=params, headers={'User-Agent': 'Alok Lal'})
 
         data = []
         if resp.status_code == 200:
